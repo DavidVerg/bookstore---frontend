@@ -1,25 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { CssBaseline, Grid } from "@mui/material";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import ApplicationBar from "./components/app-bar";
+import BookForm from "./components/book/forms/createBookForm";
+import DetailsForms from "./components/book/forms/detailsBookForm";
+import BookMainPage from "./components/book/pages/main-page";
+import BookDetails from "./components/shopping-cart/book-details";
+import ShopingCartMainPage from "./components/shopping-cart/page";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <CssBaseline />
+      <Grid sx={{ m: 0, p: 2 }}>
+        <ApplicationBar></ApplicationBar>
+        <br />
+        <Routes>
+          <Route path="/books" element={<BookMainPage />}></Route>
+          <Route path="/books/create" element={<BookForm />}></Route>
+          <Route
+            path="/books/:bookId/details"
+            element={<DetailsForms />}
+          ></Route>
+          <Route
+            path="/shopping-cart/:userId"
+            element={<ShopingCartMainPage />}
+          ></Route>
+          <Route
+            path="/shopping-cart/book-details/:bookId"
+            element={<BookDetails />}
+          ></Route>
+        </Routes>
+      </Grid>
+    </BrowserRouter>
   );
 }
 
